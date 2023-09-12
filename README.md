@@ -3,5 +3,5 @@
 ## Authors
 
 Diogo Herrera
-Luis Estrella 
+Luiz Estrela 
 Nedson Nogueria
