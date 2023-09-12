@@ -1,6 +1,6 @@
-## Card Game
+# Card Game
 
-# Authors
+## Authors
 
 Diogo Herrera
 Luis Estrella 
