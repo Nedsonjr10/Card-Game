@@ -44,4 +44,33 @@ public class Deck {
     public void setCartas_no_deck(Carta[] cartas_no_deck) {
         this.cartas_no_deck = cartas_no_deck;
     }
+
+    public void disponibilidadeDaCarta() {
+        if (quantidadeDeCartas >= 60) {
+            disponibilidade = true;
+        } else {
+            disponibilidade = false;
+        }
+    }
+
+    public void addCarta(Carta carta, Inventario inventario) { 
+        if (disponibilidade == true && !maxRepeticoes(carta)) {
+            cartas_no_deck[quantidadeDeCartas] = carta;
+            quantidadeDeCartas++;
+        }
+    }
+
+    public boolean maxRepeticoes(Carta carta) {
+        Integer cont = 0; 
+        for (int i = 0; i < quantidadeDeCartas; i++) { 
+            if (carta.getNome().equals(cartas_no_deck)) {
+                cont++;;
+            }
+        }
+        if (cont >= 3) {
+                return true;
+            }
+            return false;
+        }
+
 }
