@@ -2,6 +2,6 @@
 
 ## Authors
 
-Diogo Herrera|
-Luiz Estrela |
-Nedson Nogueria
+### Diogo Herrera
+### Luiz Estrela 
+### Nedson Nogueria
