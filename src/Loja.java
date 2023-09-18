@@ -43,29 +43,32 @@ public class Loja {
 		if(usuario.getSaldo_card_coins()>=precoBooster) {
 			usuario.setSaldo_card_coins(usuario.getSaldo_card_coins()-precoBooster); // mudo o saldo de card coin, pegando o valor que já existia e tirando o preço do booster
 			
-			
 			Carta[] inventario=usuario.getInventario();
 			for(int i=0;i<12;i++) {
 				Carta cartaAleatoria= gerarCartaAleatoria();
-				adicionarCartaInventario(inventario,cartaAleatoria);
+				int retorno = analiseRepetida(cartaAleatoria,usuario);
+				if(retorno == 1) {
+					System.out.println("VOCÊ JÁ POSSUI ESSA CARTA. SERA DEPOSITADO 10 BOOSTER´S NO SEU SALDO PARA TENTAR TIRAR OUTRA CARTA.--BOA SORTE--");
+					usuario.setSaldo_card_coins(usuario.getSaldo_card_coins()+10);
+					
+				} else {
+					System.out.println("COMPRA REALIZADA COM SUCESSO");
+					System.out.println("CARTA ADICIONADO NO INVENTARIO. USE COM SABEDORIA");
+					adicionarCartaInventario(inventario,cartaAleatoria);
+				}
+					
+				}
+				
+			}else {
+				System.out.println("VOCE NÃO POSSUI SALDO SUFICIENTE. TENTE NOVAMENTE EM OUTRA OPORTUNIDADE");
 			}
 			
-			System.out.println("COMPRA REALIZADA COM SUCESSO");
 			
 		}
-		
-		else {
-			System.out.println("VOCE NÃO POSSUI SALDO SUFICIENTE");
-		}
-		
-	}
-	
 	
    public Carta gerarCartaAleatoria() {
 	   
 	   Random aleatorio = new Random();
-	   
-	   
 	  
 	   String nome="nome qualquer";//mesma situacao do tipo
 	   String imagem="imagem qualquer";//??????
@@ -97,7 +100,20 @@ public class Loja {
 		   
 	   }
    }
-	
-	
+   
+   public int analiseRepetida(Carta cartaAleatoria,Usuario usuario) {
+	   
+	   Carta[] inventario=usuario.getInventario();
+	   
+	   
+	   for( Carta carta : inventario) {
+		   if( carta != null && carta.equals(cartaAleatoria)) {
+			   return 1;
+		   }
+		  
+	   }
+	   return 0;
+	   
 
+   }
 }
