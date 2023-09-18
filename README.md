@@ -1,5 +1,13 @@
 # Card Game
 
+## About the project
+
+The purpose of this project is to create a card game.
+
+## Technologies used
+
+Java.
+
 ## Authors
 
 ### Diogo Herrera 
