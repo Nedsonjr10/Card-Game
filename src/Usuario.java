@@ -9,6 +9,7 @@ public class Usuario {
     private int saldo_card_coins;
     private Carta[] inventario;
     private Deck[] decks;
+    private String modalidade;
 
     // construtor
     public Usuario(String user, int cpf, String senha, int idade, String sexo, String email){
@@ -105,5 +106,12 @@ public class Usuario {
         this.decks = decks;
     }
 
+    public String getModalidade() {
+        return modalidade;
+    }
+
+    public void setModalidade(String modalidade) {
+        this.modalidade = modalidade;
+    }
     
 }
