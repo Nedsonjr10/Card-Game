@@ -1,6 +1,4 @@
-package Enum;
-
-public enum enumHabilidade {
+public enum EnumHabilidade {
 
     amendontrar,
     Atropelar,

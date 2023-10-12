@@ -1,5 +1,3 @@
-package Enum;
-
 import java.util.Random;
 
 public class Enumerate {
