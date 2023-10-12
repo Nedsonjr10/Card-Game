@@ -183,12 +183,48 @@ public class Arena {
 
     public void saque(Usuario jogador) {
         System.out.println(jogador.getUser() + " está sacando cartas...");
-        // Implemente o saque de cartas aleatórias aqui
-
-        // Mostrar as cartas sacadas ao jogador
-
-        // Permita que o jogador devolva até 5 cartas, se desejar
+    
+        // Obtenha o deck do jogador
+        Deck deckJogador = (jogador == jogador1) ? deckJogador1 : deckJogador2;
+    
+        // Verifique se há cartas no deck
+        if (deckJogador.getQuantidadeDeCartas() > 0) {
+            // Gere um número aleatório para escolher uma carta do deck
+            Random rand = new Random();
+            int indiceCartaSaque = rand.nextInt(deckJogador.getQuantidadeDeCartas());
+    
+            // Obtenha a carta selecionada
+            Carta cartaSaque = deckJogador.getCartas_no_deck()[indiceCartaSaque];
+    
+            // Adicione a carta à mão do jogador
+            adicionarCartaNaMao(jogador, cartaSaque);
+    
+            // Remova a carta do deck
+            deckJogador.getCartas_no_deck()[indiceCartaSaque] = null;
+    
+            // Decrementar a quantidade de cartas no deck
+            deckJogador.setQuantidadeDeCartas(deckJogador.getQuantidadeDeCartas() - 1);
+    
+            // Mostre a carta sacada ao jogador
+            System.out.println(jogador.getUser() + " sacou a carta: " + cartaSaque.getNome());
+        } else {
+            System.out.println(jogador.getUser() + " não possui mais cartas no deck.");
+        }
+    }    
+    
+    public void adicionarCartaNaMao(Usuario jogador, Carta carta) {
+        // Obtenha a mão do jogador
+        Carta[] mao = (jogador == jogador1) ? maoJogador1 : maoJogador2;
+    
+        // Encontre a primeira posição vazia na mão e adicione a carta
+        for (int i = 0; i < mao.length; i++) {
+            if (mao[i] == null) {
+                mao[i] = carta;
+                break;
+            }
+        }
     }
+    
 
     public void turno(Usuario jogador) {
         System.out.println("É o turno de " + jogador.getUser());
@@ -230,7 +266,6 @@ public class Arena {
     
     public void posicionamento(Usuario jogador) {
         System.out.println(jogador.getUser() + " está posicionando uma carta no campo...");
-        Deck deckJogador = (jogador == jogador1) ? deckJogador1 : deckJogador2;
         Carta[][] campoJogador = (jogador == jogador1) ? campoJogador1 : campoJogador2;
         int manaMaximaJogador = (jogador == jogador1) ? manaMaximaJogador1 : manaMaximaJogador2;
     
@@ -283,7 +318,6 @@ public class Arena {
         for (int linha = 0; linha < campoAtacante.length; linha++) {
             for (int coluna = 0; coluna < campoAtacante[linha].length; coluna++) {
                 Carta cartaAtacante = campoAtacante[linha][coluna];
-    
                 if (cartaAtacante != null) {
                     // Verifique se a posição correspondente no campo defensor tem uma carta
                     Carta cartaDefensor = campoDefensor[linha][coluna];
