@@ -1,6 +1,6 @@
 public class Carta {
     private String nome;
-    private String imagem; //??
+    private String imagem; 
     private String tipo;
     private String raridade;
     private double ataque;

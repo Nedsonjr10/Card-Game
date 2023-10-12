@@ -53,7 +53,7 @@ public class Deck {
         }
     }
 
-    public void addCarta(Carta carta, Inventario inventario) { 
+    public void addCarta(Carta carta) { 
         if (disponibilidade == true && !maxRepeticoes(carta)) {
             cartas_no_deck[quantidadeDeCartas] = carta;
             quantidadeDeCartas++;
