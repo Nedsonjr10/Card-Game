@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public abstract class Progresso {
     private String[] vetorDePremiacoes = new String[60]; // Vetor de premiações com 60 posições
     private int premiacaoAtual = 0; // Premiação atual, inicialmente definida como 0
