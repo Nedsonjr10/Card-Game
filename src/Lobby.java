@@ -22,12 +22,27 @@ public class Lobby {
         usu.add(usuario);
     }
 
-    public void buscarAdversario(Usuario usuario) {
-        for (Usuario adversario : usu) {
-            if (adversario != usuario && adversario.getNivel() == usuario.getNivel()
-                    && adversario.getModalidade() == usuario.getModalidade()) {
-                System.out.println("Adversário encontrado, a partida em breve será iniciada.");
-                comecarJogo(adversario, usuario);
+    public void buscarAdversario(Usuario usuario) throws TimeOutException, IrregularDeckException {
+        boolean adversarioEncontrado = false;
+        long startTime = System.currentTimeMillis();
+
+        while (!adversarioEncontrado) {
+            for (Usuario adversario : usu) {
+                if (adversario != usuario && adversario.getNivel() == usuario.getNivel()
+                        && adversario.getModalidade().equals(usuario.getModalidade())) {
+                    System.out.println("Adversário encontrado, a partida em breve será iniciada.");
+                    comecarJogo(adversario, usuario);
+                    adversarioEncontrado = true;
+                    break;
+                }
+            }
+
+            long currentTime = System.currentTimeMillis();
+            long elapsedTime = currentTime - startTime;
+            long timeOutThreshold = 30000; // 30 segundos
+
+            if (elapsedTime > timeOutThreshold) {
+                throw new TimeOutException("Tempo esgotado. Não foi possível encontrar um adversário.");
             }
         }
     }
@@ -40,6 +55,28 @@ public class Lobby {
             }
         }
     }
+
+    private boolean isDeckValido(Deck[] decks) {
+    for (Deck deck : decks) {
+        if (deck != null && deck.getQuantidadeDeCartas() > 0 && !temRepeticoes(deck)) {
+            return true; // Deck é válido
+        }
+    }
+    return false; // Nenhum deck válido foi encontrado
+}
+
+private boolean temRepeticoes(Deck deck) {
+    Carta[] cartas = deck.getCartas_no_deck();
+    for (int i = 0; i < deck.getQuantidadeDeCartas(); i++) {
+        for (int j = i + 1; j < deck.getQuantidadeDeCartas(); j++) {
+            if (cartas[i] != null && cartas[j] != null && cartas[i].equals(cartas[j])) {
+                return true; // Encontrou repetição
+            }
+        }
+    }
+    return false; // Não há repetições
+}
+
 
     public void adicionarModoDupla() {
         List<Usuario> usuariosDisponiveis = new ArrayList<>(usu);

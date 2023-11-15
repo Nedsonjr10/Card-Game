@@ -19,7 +19,7 @@ public class Loja {
         promocao = false;
     }
 
-    public void comprarBooster(Usuario usuario) {
+    public void comprarBooster(Usuario usuario) throws Exception {
         int precoBooster = promocao ? 15 : 10; // Preço do booster (comum ou especial)
         int probabilidadeCartaUnica = promocao ? 1 : 0; // Probabilidade de receber uma carta única (em porcentagem)
 
@@ -34,7 +34,7 @@ public class Loja {
 
             System.out.println("COMPRA REALIZADA COM SUCESSO");
         } else {
-            System.out.println("VOCÊ NÃO POSSUI SALDO SUFICIENTE");
+            throw new Exception("VOCÊ NÃO POSSUI SALDO SUFICIENTE");
         }
     }
 
