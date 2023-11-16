@@ -1,4 +1,4 @@
-public class Carta {
+public class Carta implements Ativavel {
     private String nome;
     private String imagem; 
     private String tipo;
@@ -93,5 +93,9 @@ public class Carta {
         this.quantidade = quantidade;
     }
 
-    
+    @Override
+    public void ativacao() {
+        // Implementação da ativação da habilidade da carta
+        System.out.println("Ativação da habilidade da carta: " + getHabilidade());
+    }
 }

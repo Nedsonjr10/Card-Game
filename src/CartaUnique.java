@@ -16,6 +16,14 @@ public class CartaUnique extends Carta {
         this.habilidadeExtra = habilidadeExtra;
     }
 
+    @Override
+    public void ativacao() {
+        // Implementação da ativação das duas habilidades da carta unique
+        System.out.println("Ativação da habilidade da carta: " + getHabilidade());
+        System.out.println("Ativação da habilidade extra da carta unique: " + getHabilidadeExtra());
+    }
+
+
     private String gerarHabilidadeExtraAleatoria() {
         String[] habilidadesPadrao = {"Amedrontar", "Atropelar", "Unir", "Voar", "Força", "Teleporte"};
 
